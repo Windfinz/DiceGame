@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class DiceManager : MonoBehaviour
+public class DiceManager : MonoBehaviour, IDragHandler
 {
     public static int diceValue; // Lưu giá trị số điểm ngẫu nhiên được chọn
 
     // List chứa tất cả các Prefabs của các mặt xúc sắc
     public List<GameObject> diceFaces;
 
-    private bool isDragging = false;
     private GameObject draggedDice; // Lưu trữ viên xúc sắc đang được kéo
 
 
@@ -40,38 +38,43 @@ public class DiceManager : MonoBehaviour
         }
     }
 
+    public void OnDrag(PointerEventData eventData)
+    {
+        transform.position = Input.mousePosition; // di chuyển vị trí xúc sắc theo chuột
+    }
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    RaycastHit hit;
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Dice"))
-            {
-                isDragging = true;
-                draggedDice = hit.collider.gameObject;
-            }
-        }
+        //    if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Dice"))
+        //    {
+        //        isDragging = true;
+        //        draggedDice = hit.collider.gameObject;
+        //    }
+        //}
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (isDragging)
-            {
-                // Đặt viên xúc sắc vào vị trí con trỏ chuột
-                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                draggedDice.transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
-                isDragging = false;
-                draggedDice = null;
-            }
-        }
+        //if (Input.GetMouseButtonUp(0))
+        //{
+        //    if (isDragging)
+        //    {
+        //        // Đặt viên xúc sắc vào vị trí con trỏ chuột
+        //        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //        draggedDice.transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
+        //        isDragging = false;
+        //        draggedDice = null;
+        //    }
+        //}
 
-        // Kiểm tra khi đang kéo xúc sắc
-        if (isDragging && draggedDice != null)
-        {
-            // Di chuyển viên xúc sắc theo vị trí chuột
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            draggedDice.transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
-        }
+        //// Kiểm tra khi đang kéo xúc sắc
+        //if (isDragging && draggedDice != null)
+        //{
+        //    // Di chuyển viên xúc sắc theo vị trí chuột
+        //    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    draggedDice.transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
+        //}
     }
 }
