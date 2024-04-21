@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22dc5eda9c3153b428f4ec401a22a787, type: 3}
-  m_Name: 2
+  m_Name: 3
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: aa19615ae6a72484eaa8397243a889ca, type: 3}
-  diceName: 2
-  point: 2
+  icon: {fileID: 21300000, guid: d1f077ff220205744b3d7b9fa3e47518, type: 3}
+  diceName: 3
+  point: 3

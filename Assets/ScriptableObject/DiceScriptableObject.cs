@@ -1,12 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "DiceScriptableObject", menuName = "ScriptableObjects/Dice")]
 public class DiceScriptableObject : ScriptableObject
 {
     [SerializeField]
-    Image icon;
-    public Image Icon { get => icon; private set => icon = value; }
+    Sprite icon;
+    public Sprite Icon { get => icon; private set => icon = value; }
 
     [SerializeField]
     string diceName;

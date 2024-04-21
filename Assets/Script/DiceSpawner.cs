@@ -1,16 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DiceSpawner : MonoBehaviour
 {
-    private bool readyToSpawn = false;
-    public GameObject dice;
+    public List<DiceScriptableObject> diceData = new List<DiceScriptableObject>();
+    public GameObject dicePrefab;
 
-    private void Update()
+    public void RollAndSpawn()
     {
-        if(readyToSpawn == true)
-        {
-            Instantiate(dice, transform.position, Quaternion.identity);
-        }
+        GameObject dice = Instantiate(dicePrefab, transform.position, Quaternion.identity);
+        SpriteRenderer spriteRenderer = dice.GetComponent<SpriteRenderer>();
+        DiceScriptableObject randomDice = diceData[Random.Range(0, diceData.Count)];
+        spriteRenderer.sprite = randomDice.Icon;
     }
-
 }

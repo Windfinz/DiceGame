@@ -1,14 +1,10 @@
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Dice : MonoBehaviour
+public class Dice : MonoBehaviour, IDragHandler
 {
-    public DiceScriptableObject diceData;
-    public Image Icon;
-
-    private void Start()
+    public void OnDrag(PointerEventData eventData)
     {
-        Icon = diceData.Icon;
+        this.transform.position = Input.mousePosition; // di chuyển vị trí xúc sắc theo chuột
     }
-
 }
