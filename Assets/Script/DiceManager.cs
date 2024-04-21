@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class DiceManager : MonoBehaviour, IDragHandler
+public class DiceManager : MonoBehaviour
 {
     public static int diceValue; // Lưu giá trị số điểm ngẫu nhiên được chọn
 
@@ -38,10 +37,6 @@ public class DiceManager : MonoBehaviour, IDragHandler
         }
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        transform.position = Input.mousePosition; // di chuyển vị trí xúc sắc theo chuột
-    }
 
     void Update()
     {
