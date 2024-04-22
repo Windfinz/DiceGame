@@ -2,5 +2,7 @@
 
 public class Dice : MonoBehaviour
 {
-    //OnMouseDrag
+    public int point;
+
+   
 }
