@@ -1,33 +1,28 @@
 ﻿using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Row : MonoBehaviour
 {
     private int maxSize = 3;
     public List<Dice> rows = new List<Dice>(3);
-    public List<Transform> targetPositions = new List<Transform>(3);
+    private Dicemove targetPos;
 
-    private bool isInitialized = false;
+    public void AddDiceToList(Dice dice)
+    {
+        if (rows.Count < maxSize)
+        {
+            rows.Add(dice);
+            targetPos.CheckPos();
+        }
+        else
+        {
+            Debug.Log("List Full");
+        }
+    }
 
-    /*   public void AddDiceToList(Dice dice, Transform targetPosition)
-       {
-           if (rows.Count < maxSize)
-           {
-               rows.Add(dice);
-               targetPositions.Add(targetPosition);
-               ChangeDicePositions(targetPositions);
-           }
-           else
-           {
-               Debug.Log("List Full");
-           }
-       }
-    */
     private void Update()
     {
         GetTotalPointValue();
-        ChangeDicePositions(targetPositions);
     }
 
     public int GetTotalPointValue()
@@ -56,27 +51,27 @@ public class Row : MonoBehaviour
         }
     }
 
-    public void AddDice(Dice dice)
-    {
-        rows.Add(dice);
-        if (rows.Count == 1) // Nếu chỉ có một dice trong hàng, bắt đầu thiết lập vị trí cho chúng
-        {
-            isInitialized = true;
-            ChangeDicePositions(targetPositions);
-        }
-    }
+    //public void AddDice(Dice dice)
+    //{
+    //    rows.Add(dice);
+    //    if (rows.Count == 1) // Nếu chỉ có một dice trong hàng, bắt đầu thiết lập vị trí cho chúng
+    //    {
+    //        isInitialized = true;
+    //        ChangeDicePositions(targetPositions);
+    //    }
+    //}
 
-    public void ChangeDicePositions(List<Transform> newPositions)
-    {
-        if (newPositions.Count != rows.Count)
-        {
-            Debug.LogError("Number of new positions must match the number of dice in the row.");
-            return;
-        }
+    //public void ChangeDicePositions(List<Transform> newPositions)
+    //{
+    //    if (newPositions.Count != rows.Count)
+    //    {
+    //        Debug.LogError("Number of new positions must match the number of dice in the row.");
+    //        return;
+    //    }
 
-        for (int i = 0; i < rows.Count; i++)
-        {
-            rows[i].transform.position = newPositions[i].position;
-        }
-    }
+    //    for (int i = 0; i < rows.Count; i++)
+    //    {
+    //        rows[i].transform.position = newPositions[i].position;
+    //    }
+    //}
 }
