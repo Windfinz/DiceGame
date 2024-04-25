@@ -6,13 +6,32 @@ public class Row : MonoBehaviour
     private int maxSize = 3;
     public List<Dice> rows = new List<Dice>(3);
     private Dicemove targetPos;
+    private DiceSpawner diceSpawner;
 
-    public void AddDiceToList(Dice dice)
+    private void Start()
+    {
+        diceSpawner = GetComponent<DiceSpawner>();
+    }
+
+    //public void AddDiceToList(Dice dice)
+    //{
+    //    if (rows.Count < maxSize)
+    //    {
+    //        rows.Add(dice);
+    //        targetPos.CheckPos();
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("List Full");
+    //    }
+    //}
+
+    private void OnMouseDown()
     {
         if (rows.Count < maxSize)
         {
+            Dice dice = diceSpawner.RollAndSpawn();
             rows.Add(dice);
-            targetPos.CheckPos();
         }
         else
         {

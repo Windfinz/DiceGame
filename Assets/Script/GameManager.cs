@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool readyToSpawn = false;
+
 
 
 }

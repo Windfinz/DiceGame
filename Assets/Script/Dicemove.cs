@@ -13,6 +13,7 @@ public class Dicemove : MonoBehaviour
             if (targetPos[i].isFull == false ) 
             {
                 transform.DOMove(targetPos[i].moveToPos.position, 2f);
+                targetPos[i].isFull = true;
             }
         }
     }
