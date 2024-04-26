@@ -37,7 +37,7 @@ public class DiceSpawner : MonoBehaviour
         Image image = dice.GetComponent<Image>();
         DiceScriptableObject randomDice = diceData[Random.Range(0, diceData.Count)];
         
-        image = randomDice.Icon;
+        image.sprite = randomDice.Icon;
         
         Dice diceScript = dice.GetComponent<Dice>();
         
