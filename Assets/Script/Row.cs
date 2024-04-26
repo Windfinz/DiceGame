@@ -10,32 +10,31 @@ public class Row : MonoBehaviour
 
     private void Start()
     {
-        diceSpawner = GetComponent<DiceSpawner>();
+        diceSpawner = FindObjectOfType<DiceSpawner>();
     }
 
-    //public void AddDiceToList(Dice dice)
-    //{
-    //    if (rows.Count < maxSize)
-    //    {
-    //        rows.Add(dice);
-    //        targetPos.CheckPos();
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("List Full");
-    //    }
-    //}
+    public void AddDiceToList(Dice dice)
+    {
+        if(dice != null  && targetPos != null)
+        {
+            Debug.Log("CO");
+            if (rows.Count < maxSize)
+            {
+                rows.Add(dice);
+                targetPos.CheckPos();
+            }
+            else
+            {
+                Debug.Log("List Full");
+            }
+        }
+    }
 
     private void OnMouseDown()
     {
-        if (rows.Count < maxSize)
+        if( diceSpawner.selectedDice != null)
         {
-            Dice dice = diceSpawner.RollAndSpawn();
-            rows.Add(dice);
-        }
-        else
-        {
-            Debug.Log("List Full");
+            AddDiceToList(diceSpawner.selectedDice.GetComponent<Dice>());
         }
     }
 
@@ -47,12 +46,16 @@ public class Row : MonoBehaviour
     public int GetTotalPointValue()
     {
         int total = 0;
-        foreach (Dice dice in rows)
+        if(rows != null)
         {
-            total += dice.point;
-            CheckDouble();
-            Debug.Log(total);
+            foreach (Dice dice in rows)
+            {
+                total += dice.point;
+                CheckDouble();
+                Debug.Log(total);
+            }
         }
+        
         return total;
     }
 
@@ -70,27 +73,4 @@ public class Row : MonoBehaviour
         }
     }
 
-    //public void AddDice(Dice dice)
-    //{
-    //    rows.Add(dice);
-    //    if (rows.Count == 1) // Nếu chỉ có một dice trong hàng, bắt đầu thiết lập vị trí cho chúng
-    //    {
-    //        isInitialized = true;
-    //        ChangeDicePositions(targetPositions);
-    //    }
-    //}
-
-    //public void ChangeDicePositions(List<Transform> newPositions)
-    //{
-    //    if (newPositions.Count != rows.Count)
-    //    {
-    //        Debug.LogError("Number of new positions must match the number of dice in the row.");
-    //        return;
-    //    }
-
-    //    for (int i = 0; i < rows.Count; i++)
-    //    {
-    //        rows[i].transform.position = newPositions[i].position;
-    //    }
-    //}
 }

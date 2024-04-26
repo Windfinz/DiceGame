@@ -1,11 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DiceSpawner : MonoBehaviour
 {
     public List<DiceScriptableObject> diceData = new List<DiceScriptableObject>();
     public GameObject dicePrefab;
     GameManager gameManager;
+    public GameObject selectedDice;
+
+    public Transform parentPos;
 
     private void Start()
     {
@@ -20,19 +24,23 @@ public class DiceSpawner : MonoBehaviour
             //RollAndSpawn();
     }
 
-    public Dice RollAndSpawn()
+    public void SelectDice(GameObject dice)
     {
-        GameObject dice = Instantiate(dicePrefab, transform.position, Quaternion.identity);
+        selectedDice = dice;
+    }
 
-        SpriteRenderer spriteRenderer = dice.GetComponent<SpriteRenderer>();
-        
+    public void RollAndSpawn()
+    {
+        GameObject dice = Instantiate(dicePrefab,transform.position, Quaternion.identity);
+        dice.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+        dice.transform.position = parentPos.transform.position;
+        Image image = dice.GetComponent<Image>();
         DiceScriptableObject randomDice = diceData[Random.Range(0, diceData.Count)];
         
-        spriteRenderer.sprite = randomDice.Icon;
+        image = randomDice.Icon;
         
         Dice diceScript = dice.GetComponent<Dice>();
         
         diceScript.point = randomDice.Point;
-        return dice.GetComponent<Dice>();
     }
 }
