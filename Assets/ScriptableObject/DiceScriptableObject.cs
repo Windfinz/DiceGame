@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "DiceScriptableObject", menuName = "ScriptableObjects/Dice")]
 public class DiceScriptableObject : ScriptableObject

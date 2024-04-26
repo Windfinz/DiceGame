@@ -1,41 +1,31 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Row : MonoBehaviour
+public class Row : MonoBehaviour, IDropHandler
 {
     private int maxSize = 3;
     public List<Dice> rows = new List<Dice>(3);
-    private Dicemove targetPos;
-    private DiceSpawner diceSpawner;
 
-    private void Start()
+    public void OnDrop(PointerEventData eventData)
     {
-        diceSpawner = FindObjectOfType<DiceSpawner>();
+        GameObject dropped = eventData.pointerDrag;
+        Dice dice = dropped.GetComponent<Dice>();
+        dice.parentAfterDrag = transform;
     }
 
     public void AddDiceToList(Dice dice)
     {
-        if(dice != null  && targetPos != null)
-        {
             Debug.Log("CO");
             if (rows.Count < maxSize)
             {
                 rows.Add(dice);
-                targetPos.CheckPos();
             }
             else
             {
                 Debug.Log("List Full");
             }
-        }
-    }
-
-    private void OnMouseDown()
-    {
-        if( diceSpawner.selectedDice != null)
-        {
-            AddDiceToList(diceSpawner.selectedDice.GetComponent<Dice>());
-        }
+        
     }
 
     private void Update()
@@ -73,4 +63,5 @@ public class Row : MonoBehaviour
         }
     }
 
+   
 }
